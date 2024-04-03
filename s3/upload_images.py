@@ -25,6 +25,7 @@ def upload_file(file_name, bucket, object_name=None):
 
 
 def download_upload_s3():
+    # No repeating artist
     artists_set = set()
     with open('a1.json') as f:
         dictionary = json.load(f)
