@@ -1,4 +1,4 @@
-const Login = () => {
+const Login = ({loginTrigger}) => {
 
     const url = "https://jhig1vzwx1.execute-api.us-east-1.amazonaws.com/Production/react-lambda-test";
 
@@ -25,6 +25,9 @@ const Login = () => {
         const data = await response.json();
 
         console.log('log in' + data.body.login)
+        if (data.body.login != 'failed'){
+            loginTrigger(data.body.login)
+        }
 
     }
 
@@ -35,6 +38,7 @@ const Login = () => {
                 <input type="text" placeholder="Password" id="password"/>
                 <button onClick={handleLogin}>Log in</button>
             </form>
+            <a href="">Register</a>
         </div>
     );
 };

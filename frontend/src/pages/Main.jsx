@@ -3,7 +3,7 @@ import TabsContainer from "../components/TabContainer";
 import MusicRow from "../components/MusicRow";
 import { useState } from "react";
 
-const Main = () => {
+const Main = ({currentUser}) => {
     const username = "to be replaced";
 
     const tabNames = ["My Music", "Search"];
@@ -55,7 +55,7 @@ const Main = () => {
 
     return (
         <div className="main-page">
-            <Username username={username} />
+            <Username username={currentUser} />
             <TabsContainer names={tabNames} />
 
             <form action="">

@@ -73,7 +73,7 @@ def check_login_details(input_email, input_password):
         )
         item = response['Item']
         if item['password'] == input_password:
-            return True
+            return item['user_name']
         return False
     except Exception as e:
         print(e)
@@ -124,7 +124,7 @@ def lambda_handler(event, context):
                     'Access-Control-Allow-Methods': '*'
                 },
                 'body': {
-                    'login': email
+                    'login': success
                 }
             }
         else:
