@@ -3,14 +3,14 @@ import TabsContainer from "../components/TabContainer";
 import MusicRow from "../components/MusicRow";
 import { useState } from "react";
 
-const Main = ({currentUser}) => {
+const Main = ({currentUser, endpoint}) => {
     const username = "to be replaced";
 
     const tabNames = ["My Music", "Search"];
 
     const contents = null;
 
-    const url = "https://jhig1vzwx1.execute-api.us-east-1.amazonaws.com/Production/react-lambda-test";
+    const url = endpoint;
 
     const handleClick = async (e) => {
         e.preventDefault();

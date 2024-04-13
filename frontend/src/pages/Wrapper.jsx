@@ -6,6 +6,9 @@ const Wrapper = () => {
 
     const [currentUser, setCurrentUser] = useState('')
 
+    // API endpoint
+    const endpoint = ""
+
     const loginTrigger = (email) => {
         setCurrentUser(email);
     }
@@ -14,9 +17,9 @@ const Wrapper = () => {
         <div>
             {
                 currentUser == '' ?
-                <Login loginTrigger={loginTrigger}/>
+                <Login loginTrigger={loginTrigger} endpoint={endpoint}/>
                 :
-                <Main currentUser={currentUser}/>
+                <Main currentUser={currentUser} endpoint={endpoint}/>
             }
         </div>
     )

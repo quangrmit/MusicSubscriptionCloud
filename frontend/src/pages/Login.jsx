@@ -1,6 +1,6 @@
-const Login = ({loginTrigger}) => {
+const Login = ({loginTrigger, endpoint}) => {
 
-    const url = "https://jhig1vzwx1.execute-api.us-east-1.amazonaws.com/Production/react-lambda-test";
+    const url = endpoint;
 
     const handleLogin = async (e) => {
         e.preventDefault();
