@@ -4,13 +4,13 @@ import Main from "./Main";
 
 const Wrapper = () => {
 
-    const [currentUser, setCurrentUser] = useState('')
+    const [currentUser, setCurrentUser] = useState([])
 
     // API endpoint
     const endpoint = ""
 
-    const loginTrigger = (email) => {
-        setCurrentUser(email);
+    const loginTrigger = (userDetails) => {
+        setCurrentUser(userDetails);
     }
 
     return (

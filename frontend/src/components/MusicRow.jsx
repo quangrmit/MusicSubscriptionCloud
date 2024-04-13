@@ -1,4 +1,8 @@
-const MusicRow = ({ title, year, artist }) => {
+const MusicRow = ({ title, year, artist, addSubscription, subscribed }) => {
+    const handleSubscribe = () => {
+        addSubscription(title);
+    };
+
     return (
         <div>
             <li>
@@ -6,7 +10,7 @@ const MusicRow = ({ title, year, artist }) => {
                 title: {title}
                 year: {year}
                 <img src="https://s3927198-music-images.s3.amazonaws.com/ArcadeFire.jpg" alt="artist image" />
-                <button>Subscribe</button>
+                {subscribed ? <p>Subscribed</p> : <button onClick={handleSubscribe}>Subscribe</button>}
             </li>
         </div>
     );

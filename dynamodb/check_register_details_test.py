@@ -19,8 +19,10 @@ def check_register_details(input_email, input_user_name, input_password):
             'user_name': input_user_name,
             'password': input_password
         })
+        return True
     else:
         # notify user of identical
+        return False
         pass
 
 check_register_details('s39271980@student.rmit.edu.vn', 'something', 'something')
