@@ -9,7 +9,7 @@ const MusicRow = ({ title, year, artist, addSubscription, subscribed }) => {
                 artist: {artist}
                 title: {title}
                 year: {year}
-                <img src="https://s3927198-music-images.s3.amazonaws.com/ArcadeFire.jpg" alt="artist image" />
+                <img src={`https://s3927198-music-images.s3.amazonaws.com/${artist.split(' ').join('')}.jpg`} />
                 {subscribed ? <p>Subscribed</p> : <button onClick={handleSubscribe}>Subscribe</button>}
             </li>
         </div>

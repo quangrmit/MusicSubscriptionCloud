@@ -10,7 +10,7 @@ const MyMusicRow = ({ title, year, artist, removeSong}) => {
                 artist: {artist}
                 title: {title}
                 year: {year}
-                <img src="https://s3927198-music-images.s3.amazonaws.com/ArcadeFire.jpg" alt="artist image" />
+                <img src={`https://s3927198-music-images.s3.amazonaws.com/${artist.split(' ').join('')}.jpg`} alt="artist image" />
                 <button onClick={deleteSong}>Remove</button>
             </li>
         </div>
