@@ -3,6 +3,47 @@ from boto3.dynamodb.conditions import Key, Attr
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 
+
+def remove_song(input_email, input_title):
+    try:
+        table = dynamodb.Table('login')
+
+        response = table.get_item(
+            Key={
+                'email': input_email
+            }
+        )
+        item = response['Item']
+        
+        curr = item['subscribed']
+       
+        curr.remove(input_title)
+        if len(curr) == 0:
+            table.update_item(
+                Key={
+                    'email': input_email
+                },
+                UpdateExpression='REMOVE subscribed',
+                # ExpressionAttributeValues={
+                #     ':val1': curr
+                # }
+            )
+        else:
+            table.update_item(
+                Key={
+                    'email': input_email
+                },
+                UpdateExpression='SET subscribed = :val1',
+                ExpressionAttributeValues={
+                    ':val1': curr
+                }
+            )
+        
+        return True
+        
+    except Exception as e:
+        return str(e)
+
 def search_music(input_title=None, input_year=None, input_artist=None):
 
     table = dynamodb.Table('music')
@@ -98,7 +139,8 @@ def check_login_details(input_email, input_password):
         print(e)
         return False
     
-def subscribe(user_email, song_title):
+def subscribe(user_email, song):
+    
     try: 
         table = dynamodb.Table('login')
 
@@ -119,19 +161,19 @@ def subscribe(user_email, song_title):
                 },
                 UpdateExpression='SET subscribed = :val1',
                 ExpressionAttributeValues={
-                    ':val1': {song_title}
+                    ':val1': {song}
                 }
             )
         else:
             curr = item['subscribed']
-            curr.add(song_title)
+            curr.add(song)
             table.update_item(
                 Key={
                     'email': user_email
                 },
                 UpdateExpression='SET subscribed = :val1',
                 ExpressionAttributeValues={
-                    ':val1': curr
+                   ':val1': curr
                 }
             )
         new_response = table.get_item(
@@ -141,8 +183,11 @@ def subscribe(user_email, song_title):
         )
         new_item = new_response['Item']
         return list(new_item['subscribed'])
-    except: 
+    except Exception as e:
+        return e
         return False
+        
+
 
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
@@ -208,12 +253,19 @@ def lambda_handler(event, context):
         
         elif action == 'subscribe':
             email = event['email']
-            title = event['title']
+            song = event['title']
 
-            if subscribe(email, title):
-                return subscribe(email, title)        
+            if subscribe(email, song):
+                return subscribe(email, song)        
             else:
                 return False
-
+        elif action == 'remove':
+            email = event['email']
+            song = event['title']
+            return remove_song(email, song)
+            # if remove_song(email, song):
+            #     return 'success'
+            # else:
+            #     return 'failed'
     else:
         return respond(ValueError('Unsupported method "{}"'.format(operation)))

@@ -1,6 +1,8 @@
 import Username from "../components/Username";
 import TabsContainer from "../components/TabContainer";
 import MusicRow from "../components/MusicRow";
+import Search from "../components/Search";
+import MyMusic from "../components/MyMusic";
 import { useEffect, useState } from "react";
 
 const Main = ({currentUser, endpoint}) => {
@@ -10,10 +12,9 @@ const Main = ({currentUser, endpoint}) => {
 
     const contents = null;
 
-    // const url = endpoint;
-    const url = 'https://470yfgs920.execute-api.us-east-1.amazonaws.com/Testing/LambdaDBTest'
+    const url = endpoint;
 
-    const handleClick = async (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault();
         let inputTitle = e.target.parentElement.querySelector("#title").value.trim();
         let inputYear = e.target.parentElement.querySelector("#year").value.trim();
@@ -56,20 +57,21 @@ const Main = ({currentUser, endpoint}) => {
 
     const [subscribedSongs, setSubscribedSongs] = useState([])
 
+    const getSubscribed = async () => {
+            
+        let response = await fetch(`${url}?email=${currentUser[0]}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        
+        const data = await response.json();
+        console.log("subcribed" + data)
+        setSubscribedSongs(data)
+    }
     useEffect(()  => {
-        const getSubscribed = async () => {
-            
-            let response = await fetch(`${url}?email=${currentUser[0]}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            
-            const data = await response.json();
-            console.log(data)
-            setSubscribedSongs(data)
-        }
+
         getSubscribed()
     }, [])
 
@@ -90,43 +92,41 @@ const Main = ({currentUser, endpoint}) => {
             body: JSON.stringify(obj),
         });
         let data = await response.json();
-
-        // should return the subscibed songs
+        console.log(data)
         setSubscribedSongs(data)
     }
 
+    useEffect(() => {
+        console.log(subscribedSongs)
+    }, [subscribedSongs])
 
+    const removeSong = async (title) => {
+        // POST request to remove song
+        const obj = {
+            httpMethod: "POST",
+            action: "remove",
+            email: currentUser[0],
+            title: title
+        }
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(obj),
+        });
+
+        let data = await response.json();
+        console.log(data)
+        console.log('remove ' + data);
+        getSubscribed();
+    }
 
     return (
         <div className="main-page">
             <Username username={currentUser[1]} />
-            <TabsContainer names={tabNames} />
+            <TabsContainer names={tabNames} contents={[<MyMusic subscribedSongs={subscribedSongs}endpoint={endpoint} removeSong={removeSong} />,<Search addSubscription={addSubscription} subscribedSongs={subscribedSongs} endpoint={endpoint}/> ]} />
 
-            <form action="">
-                <input type="text" placeholder="Title" id="title" />
-                <input type="text" placeholder="Year" id="year" />
-                <input type="text" placeholder="Artist" id="artist" />
-
-                <button onClick={handleClick} type="">
-                    Test
-                </button>
-            </form>
-
-            <div>
-                { musicResult.length > 0 ?
-                musicResult.map((item, index) => {
-                    return (
-                        <MusicRow key={index}
-                            artist={item.artist}
-                            title={item.title}
-                            year={item.year}
-                            addSubscription={addSubscription}
-                            subscribed= {subscribedSongs.includes(item.title)}
-                        />
-                    )
-                }) : <p>No music is found</p>
-            }
-            </div>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 
-const Register = () => {
+const Register = ({switchToLogin, endpoint}) => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -14,7 +14,7 @@ const Register = () => {
             username: inputUsername,
             password: inputPassword
         }
-        const url = 'https://470yfgs920.execute-api.us-east-1.amazonaws.com/Testing/LambdaDBTest'
+        const url = endpoint;
 
         const response = await fetch(url, {
             method: "POST",
@@ -26,6 +26,7 @@ const Register = () => {
 
         const data = await response.json();
         if (data == 'success'){
+            switchToLogin()
             // Redirect to login page
         }else{
             // Notify the user of the duplicated email

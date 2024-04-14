@@ -1,9 +1,6 @@
 const Login = ({loginTrigger, endpoint}) => {
 
-    const url = 'https://470yfgs920.execute-api.us-east-1.amazonaws.com/Testing/LambdaDBTest'
-
-    
-
+    const url = endpoint;
     const handleLogin = async (e) => {
         e.preventDefault();
         let inputEmail = e.target.parentElement.querySelector('#email').value;
@@ -25,9 +22,11 @@ const Login = ({loginTrigger, endpoint}) => {
         });
 
         const data = await response.json();
-
         console.log(data)
-        loginTrigger(data)
+
+        if (data != 'failed'){
+            loginTrigger(data)
+        }
 
     }
 
@@ -38,7 +37,7 @@ const Login = ({loginTrigger, endpoint}) => {
                 <input type="text" placeholder="Password" id="password"/>
                 <button onClick={handleLogin}>Log in</button>
             </form>
-            <a href="">Register</a>
+
         </div>
     );
 };

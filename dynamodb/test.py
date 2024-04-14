@@ -1,10 +1,10 @@
 
-d = {
-    "artist": "Radiohead"
-}
-try:
-    s = d["year"]
-except KeyError:
-    s = ''
+s = set()
+s.add('ok')
+s.add('baz')
+s.add('foo')
 
-print(d["artist"])
+s.remove('baz')
+
+s =set()
+print(len(s))
