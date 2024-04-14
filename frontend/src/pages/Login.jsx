@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const Login = ({loginTrigger, endpoint}) => {
 
     const url = endpoint;
@@ -26,18 +28,26 @@ const Login = ({loginTrigger, endpoint}) => {
 
         if (data != 'failed'){
             loginTrigger(data)
+        }else {
+            setAlert(true)
         }
 
     }
 
+    const [alert, setAlert] = useState(false)
+
     return (
-        <div>
+        <div className="login">
             <form action="">
                 <input type="text" placeholder="Email" id="email"/>
-                <input type="text" placeholder="Password" id="password"/>
+                <input type="password" placeholder="Password" id="password"  />
                 <button onClick={handleLogin}>Log in</button>
             </form>
-
+            {
+                alert ? 
+                <p className="alert">Invalid email or password</p>
+                : null
+            }
         </div>
     );
 };

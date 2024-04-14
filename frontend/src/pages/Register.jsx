@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 const Register = ({switchToLogin, endpoint}) => {
 
@@ -30,10 +31,13 @@ const Register = ({switchToLogin, endpoint}) => {
             // Redirect to login page
         }else{
             // Notify the user of the duplicated email
+            setAlert(true)
         }
 
         console.log(data)
     }
+
+    const [alert, setAlert] = useState(false);
 
     return (
         <div>
@@ -44,6 +48,13 @@ const Register = ({switchToLogin, endpoint}) => {
 
                 <button onClick={handleRegister}>Register</button>
             </form>
+            {
+                alert ?
+
+                <p style={{color: "red"}}>The email already exists</p>
+                :
+                null
+            }
         </div>
     )
 }

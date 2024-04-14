@@ -5,12 +5,11 @@ import Search from "../components/Search";
 import MyMusic from "../components/MyMusic";
 import { useEffect, useState } from "react";
 
-const Main = ({currentUser, endpoint}) => {
-    const username = "to be replaced";
+const Main = ({currentUser, endpoint, logoutListener}) => {
+
 
     const tabNames = ["My Music", "Search"];
 
-    const contents = null;
 
     const url = endpoint;
 
@@ -124,7 +123,7 @@ const Main = ({currentUser, endpoint}) => {
 
     return (
         <div className="main-page">
-            <Username username={currentUser[1]} />
+            <Username username={currentUser[1]} logoutListener={logoutListener}/>
             <TabsContainer names={tabNames} contents={[<MyMusic subscribedSongs={subscribedSongs}endpoint={endpoint} removeSong={removeSong} />,<Search addSubscription={addSubscription} subscribedSongs={subscribedSongs} endpoint={endpoint}/> ]} />
 
         </div>

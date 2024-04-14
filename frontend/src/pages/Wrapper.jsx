@@ -23,20 +23,22 @@ const Wrapper = () => {
 
     const switchToLogin = () => {
         setRegistered(true)
+        setCurrentUser('')
     }
+
 
     return (
         <div>
             {
                 registered ?
               (  currentUser == '' ?
-              <div>
+              <div className="login-page">
 
                 <Login loginTrigger={loginTrigger} endpoint={endpoint}/>
-                <a href="" onClick={switchToRegister}>Register</a>
+                <a href="" onClick={switchToRegister} className="register-link">Register</a>
               </div>
                 :
-                <Main currentUser={currentUser} endpoint={endpoint}/>
+                <Main currentUser={currentUser} endpoint={endpoint} logoutListener={switchToLogin}/>
 
             ) :
                 <Register switchToLogin={switchToLogin} endpoint={endpoint}/>

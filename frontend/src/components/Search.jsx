@@ -14,7 +14,7 @@ const Search = ({addSubscription, subscribedSongs, endpoint}) => {
         
         if (inputTitle == '' && inputYear == '' && inputArtist == ''){
             // notify user of error
-            console.log('no parameters')
+            setAlert(true);
             return ;
         }
         let obj = {
@@ -42,10 +42,16 @@ const Search = ({addSubscription, subscribedSongs, endpoint}) => {
         const data = await response.json();
 
         const items = data;
+        if (items.length == 0){
+            setAlert(true);
+        }
         setMusicResult(items)
     };
+
+    const [alert, setAlert] = useState(false);
+
     return (
-        <div>
+        <div className="search">
             <form action="">
                 <input type="text" placeholder="Title" id="title" />
                 <input type="text" placeholder="Year" id="year" />
@@ -71,7 +77,11 @@ const Search = ({addSubscription, subscribedSongs, endpoint}) => {
                         );
                     })
                 ) : (
-                    <p>No music is found</p>
+                    
+                        alert ?
+                        <p className="alert">No result is retrieved. Please query again</p>
+                    :
+                    <p>Search music here</p>
                 )}
             </div>
         </div>

@@ -1,10 +1,15 @@
+const Username = ({ username, logoutListener }) => {
+    const handleLogout = () => {
+        logoutListener();
+    };
 
-const Username = ({username}) => {
     return (
-        <div>
-            {username}
+        <div className="username">
+            <p>Welcome back, {username}</p>
+
+            <button onClick={handleLogout} className="logout-btn">Log out</button>
         </div>
-    )
-}
+    );
+};
 
 export default Username;
