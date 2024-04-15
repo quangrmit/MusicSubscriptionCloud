@@ -12,7 +12,7 @@ const MyMusic = ({subscribedSongs, endpoint, removeSong}) => {
             for (const song of subscribedSongs){
                 let url = `${endpoint}?title=${song}`
                 const response = await fetch(url, {
-                    method: 'GET',
+                method: 'GET',
                     headers: {
                         "Content-Type": "application/json"
                     }
@@ -31,12 +31,15 @@ const MyMusic = ({subscribedSongs, endpoint, removeSong}) => {
 
     return (
         <div>
-            {myMusicSongs.map((song, index) => {
+            { myMusicSongs.length == 0 ? <p className="result-placeholder">You have no subscribed songs</p>
+            :
+            myMusicSongs.map((song, index) => {
                 return (
                     // <li>{song.title}</li>
-                    <MyMusicRow title={song.title} year={song.year} artist={song.artist} removeSong={removeSong}/>
+                    <MyMusicRow key={index} title={song.title} year={song.year} artist={song.artist} removeSong={removeSong}/>
                 )
-            })}
+            })
+            }
         </div>
     )
 }

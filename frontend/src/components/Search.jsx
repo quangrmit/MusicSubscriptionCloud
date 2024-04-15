@@ -58,7 +58,7 @@ const Search = ({addSubscription, subscribedSongs, endpoint}) => {
                 <input type="text" placeholder="Artist" id="artist" />
 
                 <button onClick={handleSearch} type="">
-                    Search
+                    Query
                 </button>
             </form>
 
@@ -81,7 +81,7 @@ const Search = ({addSubscription, subscribedSongs, endpoint}) => {
                         alert ?
                         <p className="alert">No result is retrieved. Please query again</p>
                     :
-                    <p>Search music here</p>
+                    <p className="result-placeholder">Search music here</p>
                 )}
             </div>
         </div>

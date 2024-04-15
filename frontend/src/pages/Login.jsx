@@ -37,7 +37,7 @@ const Login = ({loginTrigger, endpoint}) => {
     const [alert, setAlert] = useState(false)
 
     return (
-        <div className="login">
+        <div className="login-register">
             <form action="">
                 <input type="text" placeholder="Email" id="email"/>
                 <input type="password" placeholder="Password" id="password"  />

@@ -28,9 +28,10 @@ code {
   background-color: white;
   border: none;
   margin: 20px;
+  font-size: large;
 }
 .active-tab {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 
 .row{
@@ -51,13 +52,20 @@ code {
 }
 .search form > *{
   height: 30px;
+  border-radius: 10px;
+  
+}
+.search form > input {
+  padding-left: 10px;
 }
 .search form > button {
   width: 70px;
-  background-color: rgb(83, 204, 235);
-  border-radius: 10px;
-  border: 2px solid black;
+  background-color: black;
+  color: white;
+  border: none;
 }
+
+
 
 .row  img{
   border-radius: 50%;
@@ -81,7 +89,7 @@ code {
 .remove-btn{
   height: 30px;
   width: 100px;
-  background-color: rgb(237, 98, 98);
+  background-color: rgb(231, 118, 118);
   border-radius: 10px;
   border: none;
 }
@@ -107,6 +115,7 @@ code {
   /* background-color: green; */
   display: flex;
   align-items: center;
+  font-size: x-large;
   gap: 50px;
 }
 
@@ -122,7 +131,7 @@ code {
 .alert{
   color: red;
 }
-.login{
+.login-register{
   /* background-color: orange; */
   height: 50vh;
   display: flex;
@@ -130,7 +139,7 @@ code {
   justify-content: end;
   align-items: center;
 }
-.login > form{
+.login-register > form{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -138,7 +147,14 @@ code {
   gap: 3vh;
   /* background-color: blue; */
 }
-.login > form > * {
+.login-register > form > * {
   height: 30px;
   width: 300px;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+.login-register button {
+  background-color: black;
+  color: white;
+  border: none;
 }

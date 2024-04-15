@@ -40,11 +40,11 @@ const Register = ({switchToLogin, endpoint}) => {
     const [alert, setAlert] = useState(false);
 
     return (
-        <div>
-            <form action="">
+        <div className="login-register">
+            <form action="" >
                 <input type="text" placeholder="Email" id="email" />
                 <input type="text" placeholder="Username" id="username"  />
-                <input type="text" placeholder="Password" id="password" />
+                <input type="password" placeholder="Password" id="password" />
 
                 <button onClick={handleRegister}>Register</button>
             </form>
