@@ -15,20 +15,20 @@ def create_music_table():
                 'AttributeName': 'title',
                 'KeyType': 'HASH'
             },
-            {
-                'AttributeName': 'year',
-                'KeyType': 'RANGE'
-            }
+            # {
+            #     'AttributeName': 'year',
+            #     'KeyType': 'RANGE'
+            # }
         ],
         AttributeDefinitions=[
             {
                 'AttributeName': 'title',
                 'AttributeType': 'S'
             },
-            {
-                'AttributeName': 'year',
-                'AttributeType': 'S'
-            }
+            # {
+            #     'AttributeName': 'year',
+            #     'AttributeType': 'S'
+            # }
         ],
         ProvisionedThroughput={
             'ReadCapacityUnits': 10,
