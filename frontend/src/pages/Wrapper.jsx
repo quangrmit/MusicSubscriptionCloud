@@ -8,7 +8,7 @@ const Wrapper = () => {
     const [currentUser, setCurrentUser] = useState([])
 
     // API endpoint
-    const endpoint = "https://gj2gfryy11.execute-api.us-east-1.amazonaws.com/Testing/LambdaDBTest"
+    const endpoint = "https://db137lkjma.execute-api.us-east-1.amazonaws.com/Testing/LambdaDB"
 
     const [registered, setRegistered] = useState(true);
 
